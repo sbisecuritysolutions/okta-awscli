@@ -5,10 +5,13 @@ import os
 from configparser import RawConfigParser
 from getpass import getpass
 
+# Remap raw_input to input if Python 2
+# pylint: disable=W0622,C0103
 try:
     input = raw_input
 except NameError:
     pass
+# pylint: enable=W0622,C0103
 
 class OktaAuthConfig():
     """ Config helper class """
@@ -63,8 +66,8 @@ class OktaAuthConfig():
             return factor
         return None
 
-    def save_chosen_role_for_profile(self, okta_profile, role_arn):
-        """ Gets role from config """
+    def save_profile_role(self, okta_profile, role_arn):
+        """ Sets base_url and role_arn in config """
         if not self._value.has_section(okta_profile):
             self._value.add_section(okta_profile)
 
@@ -75,8 +78,8 @@ class OktaAuthConfig():
         with open(self.config_path, 'w+') as configfile:
             self._value.write(configfile)
 
-    def save_chosen_app_link_for_profile(self, okta_profile, app_link):
-        """ Gets role from config """
+    def save_profile_applink(self, okta_profile, app_link):
+        """ Sets base_url and app_link in cofnig """
         if not self._value.has_section(okta_profile):
             self._value.add_section(okta_profile)
 

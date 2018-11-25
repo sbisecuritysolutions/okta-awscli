@@ -1,5 +1,5 @@
 """ AWS authentication """
-# pylint: disable=C0325
+# pylint: disable=R1705
 import os
 import base64
 import xml.etree.ElementTree as ET
@@ -39,10 +39,9 @@ class AwsAuth():
             if predefined_role:
                 self.logger.info("Using predefined role: %s" % self.role)
                 return predefined_role
-            else:
-                self.logger.info("""Predefined role, %s, not found in the list
+            self.logger.info("""Predefined role, %s, not found in the list
 of roles assigned to you.""" % self.role)
-                self.logger.info("Please choose a role.")
+            self.logger.info("Please choose a role.")
 
         role_options = self.__create_options_from(roles)
         for option in role_options:

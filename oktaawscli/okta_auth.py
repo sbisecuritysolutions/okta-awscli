@@ -1,15 +1,18 @@
 """ Handles auth to Okta and returns SAML assertion """
-# pylint: disable=C0325,R0912,C1801
+# pylint: disable=R0912,R0913,C1801,R1705,R0902
 import sys
 import time
 import requests
 
 from bs4 import BeautifulSoup as bs
 
+# Remap raw_input to input if Python 2
+# pylint: disable=W0622,C0103
 try:
     input = raw_input
 except NameError:
     pass
+# pylint: enable=W0622,C0103
 
 class OktaAuth():
     """ Handles auth to Okta and returns SAML assertion """
@@ -202,7 +205,7 @@ class OktaAuth():
         session_id = self.get_session(session_token)
         if not self.app_link:
             app_name, app_link = self.get_apps(session_id)
-            self.okta_auth_config.save_chosen_app_link_for_profile(self.okta_profile, app_link)
+            self.okta_auth_config.save_profile_applink(self.okta_profile, app_link)
         else:
             app_name = None
             app_link = self.app_link
