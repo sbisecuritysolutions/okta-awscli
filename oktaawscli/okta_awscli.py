@@ -10,13 +10,14 @@ from oktaawscli.okta_auth_config import OktaAuthConfig
 from oktaawscli.aws_auth import AwsAuth
 
 def get_credentials(aws_auth, okta_profile, profile,
-                    verbose, logger, totp_token, cache):
+                    verbose, logger, totp_token, cache, assertion):
     """ Gets credentials from Okta """
 
     okta_auth_config = OktaAuthConfig(logger)
     okta = OktaAuth(okta_profile, verbose, logger, totp_token, okta_auth_config)
 
-    _, assertion = okta.get_assertion()
+    if assertion is None:
+        _, assertion = okta.get_assertion()
     role = aws_auth.choose_aws_role(assertion)
     principal_arn, role_arn = role
 
@@ -79,9 +80,10 @@ created. If omitted, credentials will output to console.\n")
 @click.option('-c', '--cache', is_flag=True, help='Cache the default profile credentials \
 to ~/.okta-credentials.cache\n')
 @click.option('-t', '--token', help='TOTP token from your authenticator app')
+@click.option('-a', '--assertion', help='assertion of okta')
 @click.argument('awscli_args', nargs=-1, type=click.UNPROCESSED)
 def main(okta_profile, profile, verbose, version,
-         debug, force, cache, awscli_args, token):
+         debug, force, cache, awscli_args, token, assertion):
     """ Authenticate to awscli using Okta """
     if version:
         print(__version__)
@@ -110,7 +112,7 @@ def main(okta_profile, profile, verbose, version,
             logger.info("Force option selected, but no profile provided. \
                 Option has no effect.")
         get_credentials(
-            aws_auth, okta_profile, profile, verbose, logger, token, cache
+            aws_auth, okta_profile, profile, verbose, logger, token, cache, assertion
         )
 
     if awscli_args:

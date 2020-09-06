@@ -1,2 +1,2 @@
 """ init """
-from .version import __version__
+from oktaawscli.version import __version__

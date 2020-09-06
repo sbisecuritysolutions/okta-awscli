@@ -45,22 +45,22 @@ class OktaAuthConfig():
         self.logger.info("App Link set as: %s" % app_link)
         return app_link
 
-    def username_for(self, okta_profile):
-        """ Gets username from config """
-        if self._value.has_option(okta_profile, 'username'):
-            username = self._value.get(okta_profile, 'username')
-            self.logger.info("Authenticating as: %s" % username)
-        else:
-            username = input('Enter username: ')
-        return username
+    # def username_for(self, okta_profile):
+    #     """ Gets username from config """
+    #     if self._value.has_option(okta_profile, 'username'):
+    #         username = self._value.get(okta_profile, 'username')
+    #         self.logger.info("Authenticating as: %s" % username)
+    #     else:
+    #         # username = input('Enter username: ')
+    #     return username
 
-    def password_for(self, okta_profile):
-        """ Gets password from config """
-        if self._value.has_option(okta_profile, 'password'):
-            password = self._value.get(okta_profile, 'password')
-        else:
-            password = getpass('Enter password: ')
-        return password
+    # def password_for(self, okta_profile):
+    #     """ Gets password from config """
+    #     if self._value.has_option(okta_profile, 'password'):
+    #         password = self._value.get(okta_profile, 'password')
+    #     else:
+    #         # password = getpass('Enter password: ')
+    #     return password
 
     def factor_for(self, okta_profile):
         """ Gets factor from config """
@@ -95,8 +95,8 @@ class OktaAuthConfig():
         self._value.set(okta_profile, 'base-url', base_url)
         self._value.set(okta_profile, 'role', role_arn)
 
-        with open(self.config_path, 'w+') as configfile:
-            self._value.write(configfile)
+        # with open(self.config_path, 'w+') as configfile:
+        #     self._value.write(configfile)
 
     def save_chosen_app_link_for_profile(self, okta_profile, app_link):
         """ Gets role from config """

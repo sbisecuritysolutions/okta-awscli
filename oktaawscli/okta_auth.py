@@ -35,8 +35,8 @@ class OktaAuth():
         self._preferred_mfa_type = None
         self._mfa_code = None
         self.https_base_url = "https://%s" % okta_auth_config.base_url_for(okta_profile)
-        self.username = okta_auth_config.username_for(okta_profile)
-        self.password = okta_auth_config.password_for(okta_profile)
+        # self.username = okta_auth_config.username_for(okta_profile)
+        # self.password = okta_auth_config.password_for(okta_profile)
         self.factor = okta_auth_config.factor_for(okta_profile)
         self.app_link = okta_auth_config.app_link_for(okta_profile)
         self.okta_auth_config = okta_auth_config
