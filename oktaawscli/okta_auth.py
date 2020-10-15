@@ -30,7 +30,8 @@ class OktaAuth():
         self.totp_token = totp_token
         self.logger = logger
         self.factor = ""
-        self.verbose = verbose
+        self.verbocccccckvlgbcjbnfigucvucfkkfhnettdtcifnlkjltf
+        se = verbose
         self._verify_ssl_certs = True
         self._preferred_mfa_type = None
         self._mfa_code = None

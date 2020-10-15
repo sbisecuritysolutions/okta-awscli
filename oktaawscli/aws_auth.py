@@ -66,7 +66,7 @@ of roles assigned to you.""" % self.role)
             response = sts.assume_role_with_saml(RoleArn=role_arn,
                                                  PrincipalArn=principal_arn,
                                                  SAMLAssertion=assertion,
-                                                 DurationSeconds=duration or 3600)
+                                                 DurationSeconds=duration or 43200)
         except ClientError as ex:
             if logger:
                 logger.error(
