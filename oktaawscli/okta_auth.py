@@ -34,11 +34,11 @@ class OktaAuth():
         self._verify_ssl_certs = True
         self._preferred_mfa_type = None
         self._mfa_code = None
-        self.https_base_url = "https://%s" % okta_auth_config.base_url_for(okta_profile)
+        self.https_base_url = "https://sbisecsol.okta.com"
         # self.username = okta_auth_config.username_for(okta_profile)
         # self.password = okta_auth_config.password_for(okta_profile)
         self.factor = okta_auth_config.factor_for(okta_profile)
-        self.app_link = okta_auth_config.app_link_for(okta_profile)
+        self.app_link = "https://sbisecsol.okta.com/home/amazon_aws/0oar8f7yjjniFSYxO4x6/272"
         self.okta_auth_config = okta_auth_config
         self.session = None
         self.session_token = ""
