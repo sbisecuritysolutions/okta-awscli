@@ -51,6 +51,10 @@ of roles assigned to you.""" % self.role)
         role_choice = int(input('Please select the AWS role: ')) - 1
         return roles[role_choice]
 
+    def full_choose_aws_role(self, assertion):
+        """ Choose AWS role list from SAML assertion """
+        return self.__extract_available_roles_from(assertion)
+
     @staticmethod
     def get_sts_token(role_arn, principal_arn, assertion, duration=None, logger=None):
         """ Gets a token from AWS STS """
@@ -70,10 +74,10 @@ of roles assigned to you.""" % self.role)
         except ClientError as ex:
             if logger:
                 logger.error(
-                    "Could not retrieve credentials: %s" % 
-                    ex.response['Error']['Message']
+                    "role %s: Could not retrieve credentials: %s" % 
+                    role_arn, ex.response['Error']['Message']
                 )
-                exit(-1)
+                raise
             else:
                 raise
 
